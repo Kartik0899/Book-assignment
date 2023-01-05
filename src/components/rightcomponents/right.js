@@ -1,23 +1,22 @@
 import React from 'react';
 import { BiSearch } from 'react-icons/bi';
-// import { useDispatch } from 'react-redux';
-// import { pushId } from '../../actions/action';
-// import { useSelector } from 'react-redux';
-
-const RightComponents = ({ settingCurrImg }) => {
-    // const dispatch = useDispatch();
-    // const data = useSelector((state) => state.currentImgId)
-    // console.log(data);
-
+const RightComponents = ({ replaceCurrArr, settingCurrImg, settingCurrentImgType, settingCurrArr, currImg, currentImageType }) => {
     function imgOnClick(imgname) {
-        // dispatch(pushId(imgname));
-        settingCurrImg(imgname);
+
+        // console.log(currentImageType);
+        if (currentImageType == 'left') {
+            replaceCurrArr(currImg, imgname);
+            settingCurrImg(imgname, 'right');
+        }
+        else {
+            settingCurrImg(imgname, 'right');
+        }
     }
 
     return (
         <div className='h-full w-[23%] flex justify-center items-center'>
-            <div className="bg-white border shadow-lg rounded-lg">
-                <div className='flex justify-between items-center w-[90%] my-2 mx-auto'>
+            <div className="bg-white shadow-lg rounded-lg">
+                <div className='flex justify-between items-center w-[90%] my-3 mx-auto'>
                     <div>Change Background</div>
                     <div className='bg-blue-200 p-1 rounded-lg'><BiSearch /></div>
                 </div>

@@ -1,2 +1,0 @@
-export const IMGPUSHID = 'IMGPUSHID';
-export const IMGPUSHARRAY = 'IMGPUSHARRAY';

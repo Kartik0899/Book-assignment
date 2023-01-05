@@ -5,3 +5,26 @@
 .App {
   text-align: center;
 }
+
+
+/* Chrome, Edge, and Safari */
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* .scrollbar::-webkit-scrollbar-track {
+  background: rebeccapurple;
+} */
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: green;
+  /*   background: repeating-linear-gradient(
+    45deg,
+    var(--secondary),
+    var(--secondary) 5px,
+    var(--primary) 5px,
+    var(--primary) 10px
+  ); */
+  border-radius: 20px;
+  border: 3px solid rebeccapurple;
+}
