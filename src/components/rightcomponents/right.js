@@ -27,6 +27,7 @@ const RightComponents = ({ replaceCurrArr, settingCurrImg, settingCurrentImgType
                         <option>React with Tailwind CSS</option>
                         <option>React With Headless UI</option>
                     </select>
+                    
                 </div>
                 <div className="h-full w-[90%] mx-auto my-2">
                     <div className='flex justify-center items-center m-2'>

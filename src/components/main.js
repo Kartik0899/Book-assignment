@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CenterComponents from './centercomponents/center'
+import Navbar from './Navbar/Navbar'
 import PagesComponents from './pagecomponents/pages'
 import RightComponents from './rightcomponents/right'
 
@@ -69,11 +70,17 @@ const Main = () => {
 
 
     return (
-        <div className='flex justify-evenly items-center h-screen bg-blue-200'>
-            <PagesComponents settingCurrImg={settingCurrImg} imgArr={imgArr} settingCurrentImgType={settingCurrentImgType} />
-            <CenterComponents settingCurrArr={settingCurrArr} currImg={currImg} />
-            <RightComponents settingCurrImg={settingCurrImg} settingCurrentImgType={settingCurrentImgType} settingCurrArr={settingCurrArr} currImg={currImg} currentImageType={currentImageType} replaceCurrArr={replaceCurrArr} />
-        </div>
+        <>
+            <Navbar />
+            <div className='flex justify-evenly items-center h-screen bg-blue-200'>
+                {/* <div className='flex justify-evenly items-center h-screen'> */}
+                <PagesComponents settingCurrImg={settingCurrImg} imgArr={imgArr} settingCurrentImgType={settingCurrentImgType} />
+                <CenterComponents settingCurrArr={settingCurrArr} currImg={currImg} />
+                <RightComponents settingCurrImg={settingCurrImg} settingCurrentImgType={settingCurrentImgType} settingCurrArr={settingCurrArr} currImg={currImg} currentImageType={currentImageType} replaceCurrArr={replaceCurrArr} />
+                {/* </div> */}
+            </div>
+        </>
+
     )
 }
 
