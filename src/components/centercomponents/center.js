@@ -1,9 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GrAddCircle } from 'react-icons/gr';
 import { AiOutlineEye } from 'react-icons/ai';
 import { GiVintageRobot } from 'react-icons/gi';
+import EmojiPicker from "emoji-picker-react";
 
 const CenterComponents = ({ currImg, settingCurrArr }) => {
+
+    const ref = useRef()
+    const [selectedEmoji, setSelectedEmoji] = useState();
+    const [input, setInput] = useState();
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    useEffect(() => {
+        const checkIfClickedOutside = e => {
+            // If the emoji menu is open and the clicked target is not within the menu,
+            // then close the menu
+            if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+                setIsMenuOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", checkIfClickedOutside)
+
+        return () => {
+            // Cleanup the event listener
+            document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    }, [isMenuOpen])
 
     const addNew = () => {
         if (currImg) settingCurrArr(currImg);
@@ -13,12 +37,30 @@ const CenterComponents = ({ currImg, settingCurrArr }) => {
 
     }, [currImg])
 
+    function onClick(emojiData, event) {
+        setSelectedEmoji(emojiData.emoji);
+    }
 
     return (
-        <div className='h-full w-[33%] flex flex-col justify-center items-center'>
+        <div className='h-full w-[33%] flex flex-col justify-center items-center border border-black relative'>
+            <div className='w-full flex border border-black justify-start items-start' ref={ref}>
+                <input className="appearance-none bg-transparent border-black border-b-2 w-[33%] py-1 px-4 leading-tight focus:outline-none absolute top-[25%] left-6 z-20" type="text" placeholder="Start typing here" aria-label="Full name"
+                    value={selectedEmoji}
+                    onChange={(e) => setInput(e.target.value)}
+                    onClick={() => setIsMenuOpen(oldState => !oldState)}
+                />
+                {
+                    isMenuOpen && (
+                        <EmojiPicker onEmojiClick={onClick}
+                            height={350} width={350}
+                            autoFocusSearch={true}
+                        />
+                    )
+                }
+            </div>
             {
                 currImg == null || currImg == undefined ? null :
-                    <div className='h-[50%] w-full flex justify-center items-center bg-auto bg-no-repeat bg-center border border-black'>
+                    <div className='h-[50%] w-full flex justify-center items-center bg-auto bg-no-repeat bg-center border border-black z-10'>
                         <img src={currImg} alt="" />
                     </div>
             }
@@ -32,3 +74,13 @@ const CenterComponents = ({ currImg, settingCurrArr }) => {
 }
 
 export default CenterComponents;
+
+
+{/* <EmojiPicker onEmojiClick={
+    onClick
+} />
+function onClick(emojiData, event) {
+    setSelectedEmoji(emojiData.emoji);
+}
+import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+const [selectedEmoji, setSelectedEmoji] = useState(); */}
