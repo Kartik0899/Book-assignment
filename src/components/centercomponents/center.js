@@ -7,7 +7,7 @@ import EmojiPicker from "emoji-picker-react";
 const CenterComponents = ({ currImg, settingCurrArr }) => {
 
     const ref = useRef()
-    const [selectedEmoji, setSelectedEmoji] = useState();
+    const [selectedEmoji, setSelectedEmoji] = useState('');
     const [input, setInput] = useState();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -44,16 +44,17 @@ const CenterComponents = ({ currImg, settingCurrArr }) => {
     return (
         <div className='h-full w-[33%] flex flex-col justify-center items-center relative'>
             <div className='w-full flex justify-start items-start' ref={ref}>
-                <input className="appearance-none bg-transparent border-black border-b-2 w-[33%] py-1 px-4 leading-tight focus:outline-none absolute top-[25%] left-6 z-20" type="text" placeholder="Start typing here" aria-label="Full name"
+                <input
+                    className=" bg-transparent border-black border-b-2 w-[33%] py-1 px-4 leading-tight absolute top-[25%] left-6 z-20" type="text" placeholder="Start typing here"
                     value={selectedEmoji}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={(e) => setSelectedEmoji(e.target.value)}
                     onClick={() => setIsMenuOpen(oldState => !oldState)}
                 />
                 {
                     isMenuOpen && (
                         <EmojiPicker onEmojiClick={onClick}
                             height={350} width={350}
-                            autoFocusSearch={true}
+                            // autoFocusSearch={true}
                         />
                     )
                 }
